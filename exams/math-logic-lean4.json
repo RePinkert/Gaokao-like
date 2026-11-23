@@ -1,0 +1,505 @@
+{
+  "meta": {
+    "id": "math-logic-lean4",
+    "title": "Gaokao-Style Assessment: Propositional & Quantifier Logic (Lean 4)",
+    "domain": "mathematics",
+    "durationMinutes": 35,
+    "scale": "compact"
+  },
+  "knowledgePoints": [
+    {
+      "id": "kp-connectives",
+      "name": "Logical Connectives & Semantics",
+      "dimension": "lexicon",
+      "remediation": "Review truth tables and introduction/elimination rules for ∧, ∨, →, ¬."
+    },
+    {
+      "id": "kp-quantifiers",
+      "name": "Quantifier Scope & Negation",
+      "dimension": "morphosyntax",
+      "remediation": "Practice pushing negation across ∀ and ∃ without swapping variable binding."
+    },
+    {
+      "id": "kp-contrapositive",
+      "name": "Contraposition vs. Converse",
+      "dimension": "discourse",
+      "remediation": "Distinguish P → Q's equivalent contrapositive (¬Q → ¬P) from its invalid converse (Q → P)."
+    },
+    {
+      "id": "kp-demorgan",
+      "name": "De Morgan's Laws",
+      "dimension": "morphosyntax",
+      "remediation": "Verify both directions of ¬(P ∨ Q) ↔ ¬P ∧ ¬Q constructively."
+    },
+    {
+      "id": "kp-proof-flow",
+      "name": "Constructive Proof Structure",
+      "dimension": "discourse",
+      "remediation": "Trace hypothesis introduction and goal decomposition step by step."
+    },
+    {
+      "id": "kp-lean-output",
+      "name": "Lean 4 Formal Proof Construction",
+      "dimension": "output",
+      "remediation": "Practice Lean 4 tactics: intro, constructor, exact, Or.inl, Or.inr."
+    }
+  ],
+  "parts": {
+    "part1": {
+      "pairs": [
+        {
+          "id": "1.1",
+          "left": "P → Q",
+          "rightId": "A",
+          "right": "Implication: false only when P holds and Q fails",
+          "kp": "kp-connectives",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "Material implication is false solely when antecedent is true and consequent is false."
+        },
+        {
+          "id": "1.2",
+          "left": "¬Q → ¬P",
+          "rightId": "B",
+          "right": "Contrapositive of P → Q, logically equivalent to it",
+          "kp": "kp-contrapositive",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "Contraposition reverses and negates both sides of an implication."
+        },
+        {
+          "id": "1.3",
+          "left": "∀ x, P x",
+          "rightId": "C",
+          "right": "Universal quantification: P holds for every x in the domain",
+          "kp": "kp-quantifiers",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "Universal quantifier binds x across the entire domain."
+        },
+        {
+          "id": "1.4",
+          "left": "∃ x, ¬P x",
+          "rightId": "D",
+          "right": "Negation of ∀ x, P x in classical logic",
+          "kp": "kp-quantifiers",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "A single counterexample refutes a universal statement."
+        },
+        {
+          "id": "1.5",
+          "left": "Or.inl hp",
+          "rightId": "E",
+          "right": "Lean 4 constructor proving P ∨ Q from a proof hp : P",
+          "kp": "kp-lean-output",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "Or.inl injects a proof of the left disjunct into P ∨ Q."
+        }
+      ]
+    },
+    "part2": {
+      "passages": [
+        {
+          "id": "P2-A",
+          "title": "Passage A: Constructive vs. Classical Negation",
+          "body": "In intuitionistic type theory (as implemented in Lean 4's core), ¬P is defined as P → False. Under this definition, the implication ¬(P ∨ Q) → ¬P ∧ ¬Q is constructively provable without using the Law of Excluded Middle (LEM). By contrast, deriving ¬P ∨ ¬Q from ¬(P ∧ Q) requires classical reasoning because knowing that P and Q cannot both hold does not constructively tell us which one fails. Similarly, while (P → Q) → (¬Q → ¬P) is constructive, its converse (¬Q → ¬P) → (P → Q) requires double-negation elimination.",
+          "items": [
+            {
+              "id": "2.1",
+              "stem": "Why is ¬(P ∨ Q) → ¬P ∧ ¬Q provable constructively in Lean 4?",
+              "options": {
+                "A": "Because Lean 4 enables LEM by default in its core",
+                "B": "Because ¬P is P → False and each disjunct injects directly into P ∨ Q",
+                "C": "Because ∧ and ∨ are identical in type theory",
+                "D": "Because False implies True"
+              },
+              "answer": "B",
+              "kp": "kp-demorgan",
+              "dimension": "discourse",
+              "points": 3,
+              "explanation": "Constructive proofs of ¬P and ¬Q only need Or.inl/Or.inr and h : (P ∨ Q) → False."
+            },
+            {
+              "id": "2.2",
+              "stem": "Which implication in the passage requires classical reasoning?",
+              "options": {
+                "A": "¬(P ∨ Q) → ¬P ∧ ¬Q",
+                "B": "(P → Q) → (¬Q → ¬P)",
+                "C": "¬(P ∧ Q) → ¬P ∨ ¬Q",
+                "D": "P → P ∨ Q"
+              },
+              "answer": "C",
+              "kp": "kp-demorgan",
+              "dimension": "discourse",
+              "points": 3,
+              "explanation": "Constructively, knowing ¬(P ∧ Q) does not decide which of P or Q fails."
+            },
+            {
+              "id": "2.3",
+              "stem": "What extra principle is needed for (¬Q → ¬P) → (P → Q)?",
+              "options": {
+                "A": "Modus ponens",
+                "B": "Double-negation elimination",
+                "C": "Universal instantiation",
+                "D": "Conjunction elimination"
+              },
+              "answer": "B",
+              "kp": "kp-contrapositive",
+              "dimension": "discourse",
+              "points": 3,
+              "explanation": "The passage states the converse of contraposition requires double-negation elimination."
+            }
+          ]
+        }
+      ]
+    },
+    "part3": {
+      "passage": "Theorem: For any propositions P and Q, ¬(P ∨ Q) → ¬P ∧ ¬Q.\n\nProof:\n1. [1]\n2. [2]\n3. [3]\n4. [4]\n5. [5]\nQ.E.D.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Assume h : ¬(P ∨ Q), meaning any proof of P ∨ Q yields False."
+        },
+        {
+          "id": "B",
+          "text": "To prove the conjunction ¬P ∧ ¬Q, split into two subgoals: ¬P and ¬Q."
+        },
+        {
+          "id": "C",
+          "text": "For the first subgoal ¬P, assume hp : P and form Or.inl hp : P ∨ Q, then apply h to obtain False."
+        },
+        {
+          "id": "D",
+          "text": "For the second subgoal ¬Q, assume hq : Q and form Or.inr hq : P ∨ Q, then apply h to obtain False."
+        },
+        {
+          "id": "E",
+          "text": "Combining both subgoals completes the proof of ¬P ∧ ¬Q."
+        },
+        {
+          "id": "F",
+          "text": "Invoke the Law of Excluded Middle on P to split into cases P and ¬P."
+        },
+        {
+          "id": "G",
+          "text": "Assume ¬P ∧ ¬Q and derive P ∨ Q by modus ponens."
+        }
+      ],
+      "items": [
+        {
+          "id": "3.1",
+          "answer": "A",
+          "kp": "kp-proof-flow",
+          "dimension": "discourse",
+          "points": 3,
+          "explanation": "To prove an implication, first introduce its antecedent h : ¬(P ∨ Q)."
+        },
+        {
+          "id": "3.2",
+          "answer": "B",
+          "kp": "kp-proof-flow",
+          "dimension": "discourse",
+          "points": 3,
+          "explanation": "Next decompose the conjunction goal ¬P ∧ ¬Q into two subgoals."
+        },
+        {
+          "id": "3.3",
+          "answer": "C",
+          "kp": "kp-demorgan",
+          "dimension": "discourse",
+          "points": 3,
+          "explanation": "Prove ¬P by injecting hp into P ∨ Q via Or.inl and applying h."
+        },
+        {
+          "id": "3.4",
+          "answer": "D",
+          "kp": "kp-demorgan",
+          "dimension": "discourse",
+          "points": 3,
+          "explanation": "Prove ¬Q symmetrically using Or.inr."
+        },
+        {
+          "id": "3.5",
+          "answer": "E",
+          "kp": "kp-proof-flow",
+          "dimension": "discourse",
+          "points": 3,
+          "explanation": "Once both conjuncts are proved, the theorem is established."
+        }
+      ],
+      "distractorExplanations": {
+        "F": "LEM is unnecessary; this direction of De Morgan's Law is purely constructive.",
+        "G": "This reverses the implication direction and assumes the conclusion."
+      }
+    },
+    "part4": {
+      "passage": "To prove (P → Q) → (¬Q → ¬P), we first [1] hPQ : P → Q. Next we assume hnotQ : ¬Q and hp : P. Applying hPQ to hp produces a proof of [2]. Because ¬Q is definitionally Q → [3], applying hnotQ to that proof yields a contradiction. Note that if we instead tried to prove (P → Q) → (Q → P), the claim would be [4] in general, since Q being true does not force P to hold. Likewise, negating ∀ x, P x yields ∃ x, [5], whereas negating ∃ x, P x yields [6] x, ¬P x.",
+      "items": [
+        {
+          "id": "4.1",
+          "options": {
+            "A": "introduce",
+            "B": "negate",
+            "C": "quantify",
+            "D": "eliminate"
+          },
+          "answer": "A",
+          "kp": "kp-proof-flow",
+          "dimension": "discourse",
+          "points": 2,
+          "explanation": "Implication introduction brings the hypothesis into context."
+        },
+        {
+          "id": "4.2",
+          "options": {
+            "A": "P",
+            "B": "Q",
+            "C": "¬P",
+            "D": "P ∧ Q"
+          },
+          "answer": "B",
+          "kp": "kp-connectives",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "By modus ponens, hPQ : P → Q applied to hp : P yields Q."
+        },
+        {
+          "id": "4.3",
+          "options": {
+            "A": "True",
+            "B": "Prop",
+            "C": "False",
+            "D": "Type"
+          },
+          "answer": "C",
+          "kp": "kp-connectives",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "In constructive logic, ¬Q is defined as Q → False."
+        },
+        {
+          "id": "4.4",
+          "options": {
+            "A": "constructive",
+            "B": "tautological",
+            "C": "invalid",
+            "D": "symmetric"
+          },
+          "answer": "C",
+          "kp": "kp-contrapositive",
+          "dimension": "discourse",
+          "points": 2,
+          "explanation": "The converse of an implication is not generally valid."
+        },
+        {
+          "id": "4.5",
+          "options": {
+            "A": "P x",
+            "B": "¬P x",
+            "C": "∀ x, P x",
+            "D": "False"
+          },
+          "answer": "B",
+          "kp": "kp-quantifiers",
+          "dimension": "morphosyntax",
+          "points": 2,
+          "explanation": "Negating a universal statement asserts the existence of a counterexample ¬P x."
+        },
+        {
+          "id": "4.6",
+          "options": {
+            "A": "∃",
+            "B": "¬",
+            "C": "∀",
+            "D": "→"
+          },
+          "answer": "C",
+          "kp": "kp-quantifiers",
+          "dimension": "morphosyntax",
+          "points": 2,
+          "explanation": "Negating an existential statement asserts ¬P x for all x."
+        }
+      ]
+    },
+    "part5": {
+      "passage": "Complete the exact symbolic forms:\n1. In Lean 4, ¬P is definitionally equivalent to [1].\n2. The contrapositive of A → B is [2].\n3. By De Morgan's Law, ¬(A ∨ B) is equivalent to [3].\n4. The Lean 4 tactic to split a conjunction goal A ∧ B into two subgoals is [4].",
+      "items": [
+        {
+          "id": "5.1",
+          "prompt": "implication to False",
+          "accepted": [
+            "P → False",
+            "P -> False"
+          ],
+          "kp": "kp-connectives",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "Negation is defined as P → False."
+        },
+        {
+          "id": "5.2",
+          "prompt": "contrapositive",
+          "accepted": [
+            "¬B → ¬A",
+            "¬B -> ¬A",
+            "~B -> ~A"
+          ],
+          "kp": "kp-contrapositive",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "Reverse and negate both sides: ¬B → ¬A."
+        },
+        {
+          "id": "5.3",
+          "prompt": "conjunction form",
+          "accepted": [
+            "¬A ∧ ¬B",
+            "~A /\\ ~B",
+            "¬A /\\ ¬B"
+          ],
+          "kp": "kp-demorgan",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "Negation distributes over disjunction by turning ∨ into ∧."
+        },
+        {
+          "id": "5.4",
+          "prompt": "Lean 4 tactic",
+          "accepted": [
+            "constructor"
+          ],
+          "caseSensitive": true,
+          "kp": "kp-lean-output",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "The constructor tactic splits a conjunction goal into its two components."
+        }
+      ]
+    },
+    "part6": {
+      "lines": [
+        {
+          "line": 1,
+          "text": "Claim: ¬(P ∨ Q) → (¬P ∧ ¬Q)"
+        },
+        {
+          "line": 2,
+          "text": "Step 1: Assume h : ¬(P ∧ Q)."
+        },
+        {
+          "line": 3,
+          "text": "Step 2: Split the goal into ¬P and ¬Q."
+        },
+        {
+          "line": 4,
+          "text": "Step 3: Assume hp : P, then construct Or.inr hp : P ∨ Q."
+        },
+        {
+          "line": 5,
+          "text": "Step 4: Apply h to obtain True."
+        },
+        {
+          "line": 6,
+          "text": "Step 5: By symmetry, prove ¬Q using Or.inr hq and sorry."
+        }
+      ],
+      "items": [
+        {
+          "id": "6.1",
+          "line": 2,
+          "op": "replace",
+          "target": "¬(P ∧ Q)",
+          "fix": "¬(P ∨ Q)",
+          "acceptedFixes": [
+            "¬(P ∨ Q)",
+            "P ∨ Q"
+          ],
+          "kp": "kp-demorgan",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "The hypothesis of the theorem is ¬(P ∨ Q), not ¬(P ∧ Q)."
+        },
+        {
+          "id": "6.2",
+          "line": 4,
+          "op": "replace",
+          "target": "Or.inr",
+          "fix": "Or.inl",
+          "caseSensitive": true,
+          "kp": "kp-lean-output",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "hp : P belongs to the left disjunct, so Or.inl hp is required."
+        },
+        {
+          "id": "6.3",
+          "line": 5,
+          "op": "replace",
+          "target": "True",
+          "fix": "False",
+          "caseSensitive": true,
+          "kp": "kp-connectives",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "Applying ¬(P ∨ Q) to P ∨ Q yields False, not True."
+        },
+        {
+          "id": "6.4",
+          "line": 6,
+          "op": "delete",
+          "target": "and sorry",
+          "fix": "",
+          "acceptedFixes": [
+            "",
+            "sorry",
+            "and sorry"
+          ],
+          "kp": "kp-lean-output",
+          "dimension": "output",
+          "points": 3,
+          "explanation": "A valid formal proof must contain zero sorry placeholders."
+        }
+      ]
+    },
+    "part7": {
+      "id": "7.1",
+      "mode": "lean4",
+      "theoremName": "de_morgan_or",
+      "signature": "theorem de_morgan_or (P Q : Prop) : ¬(P ∨ Q) → ¬P ∧ ¬Q :=",
+      "forbiddenTokens": [
+        "sorry",
+        "admit",
+        "axiom",
+        "unsafe",
+        "implemented_by",
+        "extern"
+      ],
+      "prompt": "Prove De Morgan's Law constructively in Lean 4 without using sorry, admit, or custom axioms. Keep the exact theorem signature unchanged. Also answer the 2 quick verification checks below.",
+      "starterCode": "theorem de_morgan_or (P Q : Prop) : ¬(P ∨ Q) → ¬P ∧ ¬Q :=\n  by\n    sorry\n",
+      "referenceSolution": "theorem de_morgan_or (P Q : Prop) : ¬(P ∨ Q) → ¬P ∧ ¬Q :=\n  by\n    intro h\n    constructor\n    · exact fun hp => h (Or.inl hp)\n    · exact fun hq => h (Or.inr hq)\n",
+      "negativeSolution": "theorem de_morgan_or (P Q : Prop) : ¬(P ∨ Q) → ¬P ∧ ¬Q :=\n  by\n    sorry\n",
+      "quickChecks": [
+        {
+          "id": "Q1",
+          "question": "If P = False and Q = False, what is the truth value of ¬(P ∨ Q)? (true/false)",
+          "accepted": [
+            "true"
+          ]
+        },
+        {
+          "id": "Q2",
+          "question": "Which Lean 4 constructor injects hq : Q into P ∨ Q?",
+          "accepted": [
+            "Or.inr"
+          ]
+        }
+      ],
+      "kp": "kp-lean-output",
+      "dimension": "output",
+      "points": 20,
+      "explanation": "Introduce h : ¬(P ∨ Q), split the conjunction with constructor, and refute P and Q via Or.inl and Or.inr."
+    }
+  }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>__EXAM_TITLE__</title>
+  <style>__STYLES_CSS__</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="exam-title-wrap">
+      <h1 id="exam-title"></h1>
+      <div class="exam-meta" id="exam-meta"></div>
+    </div>
+    <nav class="nav-pills">
+      <a class="nav-pill" href="#sec-part1">Part I</a>
+      <a class="nav-pill" href="#sec-part2">Part II</a>
+      <a class="nav-pill" href="#sec-part3">Part III</a>
+      <a class="nav-pill" href="#sec-part4">Part IV</a>
+      <a class="nav-pill" href="#sec-part5">Part V</a>
+      <a class="nav-pill" href="#sec-part6">Part VI</a>
+      <a class="nav-pill" href="#sec-part7">Part VII</a>
+    </nav>
+    <div class="toolbar-actions">
+      <span class="timer-badge" id="timer-badge">00:00</span>
+      <button type="button" id="btn-reset">Reset</button>
+      <button type="button" id="btn-export">Export JSON</button>
+      <button type="button" class="primary" id="btn-submit">Submit &amp; Grade</button>
+    </div>
+  </header>
+  <main class="container">
+    <section class="report-panel" id="report-panel"></section>
+    <section class="section-card" id="sec-part1"></section>
+    <section class="section-card" id="sec-part2"></section>
+    <section class="section-card" id="sec-part3"></section>
+    <section class="section-card" id="sec-part4"></section>
+    <section class="section-card" id="sec-part5"></section>
+    <section class="section-card" id="sec-part6"></section>
+    <section class="section-card" id="sec-part7"></section>
+  </main>
+  <script>window.__EXAM_DATA__ = __EXAM_JSON__;</script>
+  <script>__GRADER_JS__</script>
+  <script>__UI_JS__</script>
+</body>
+</html>

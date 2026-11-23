@@ -1,0 +1,496 @@
+{
+  "meta": {
+    "id": "nl-academic-english",
+    "title": "Gaokao-Style Assessment: Academic English & SLA Discourse",
+    "domain": "natural-language",
+    "durationMinutes": 35,
+    "scale": "compact"
+  },
+  "knowledgePoints": [
+    {
+      "id": "kp-markers",
+      "name": "Academic Discourse Markers",
+      "dimension": "lexicon",
+      "remediation": "Contrast concessive (whereas/although), causal (consequently), and additive (moreover) connectors."
+    },
+    {
+      "id": "kp-sla-reading",
+      "name": "Academic Reading & Inference",
+      "dimension": "discourse",
+      "remediation": "Distinguish authorial claims from cited hypotheses and boundary conditions."
+    },
+    {
+      "id": "kp-cohesion",
+      "name": "Paragraph Cohesion & Reference",
+      "dimension": "discourse",
+      "remediation": "Track demonstrative pronouns (this/these) and lexical chains across adjacent sentences."
+    },
+    {
+      "id": "kp-morph",
+      "name": "Morphosyntactic Inflection & Clauses",
+      "dimension": "morphosyntax",
+      "remediation": "Review participle clauses, nominalization, and subject-verb agreement."
+    },
+    {
+      "id": "kp-monitor",
+      "name": "Self-Monitoring & Error Detection",
+      "dimension": "morphosyntax",
+      "remediation": "Check article usage, preposition collocations, and verb tense consistency line by line."
+    },
+    {
+      "id": "kp-synthesis",
+      "name": "Controlled Academic Synthesis",
+      "dimension": "output",
+      "remediation": "Practice combining concessive and causal clauses in formal register without contractions."
+    }
+  ],
+  "parts": {
+    "part1": {
+      "pairs": [
+        {
+          "id": "1.1",
+          "left": "nevertheless",
+          "rightId": "A",
+          "right": "Introduces a contrast that holds despite the preceding point",
+          "kp": "kp-markers",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "Nevertheless signals concession/contrast."
+        },
+        {
+          "id": "1.2",
+          "left": "consequently",
+          "rightId": "B",
+          "right": "Marks a direct logical result of the previous statement",
+          "kp": "kp-markers",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "Consequently introduces a result or effect."
+        },
+        {
+          "id": "1.3",
+          "left": "whereas",
+          "rightId": "C",
+          "right": "Subordinating conjunction contrasting two parallel clauses",
+          "kp": "kp-markers",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "Whereas links two contrasting clauses inside one sentence."
+        },
+        {
+          "id": "1.4",
+          "left": "albeit",
+          "rightId": "D",
+          "right": "Concessive conjunction introducing a concise qualifying phrase",
+          "kp": "kp-markers",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "Albeit means 'although it be' and precedes a phrase rather than a full finite clause."
+        },
+        {
+          "id": "1.5",
+          "left": "comprehensible input",
+          "rightId": "E",
+          "right": "Target-language material just beyond a learner's current level (i+1)",
+          "kp": "kp-sla-reading",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "Krashen's i+1 hypothesis defines comprehensible input as slightly above current competence."
+        }
+      ]
+    },
+    "part2": {
+      "passages": [
+        {
+          "id": "P2-A",
+          "title": "Passage A: Why Input Alone Is Not Enough",
+          "body": "In second language acquisition research, Stephen Krashen argued that learners acquire grammatical competence primarily through comprehensible input—messages slightly beyond their current proficiency (i+1). However, longitudinal studies of French immersion students in Canada revealed a striking asymmetry: after years of rich input, learners achieved near-native reading and listening comprehension, yet continued to make persistent morphosyntactic errors when speaking or writing. To account for this receptive-productive gap, Merrill Swain proposed the Output Hypothesis, arguing that producing language forces learners to notice gaps in their syntactic knowledge and test hypotheses explicitly.",
+          "items": [
+            {
+              "id": "2.1",
+              "stem": "What weakness did Canadian French immersion students exhibit despite years of input?",
+              "options": {
+                "A": "Poor listening comprehension",
+                "B": "Persistent morphosyntactic errors in speaking and writing",
+                "C": "Inability to read academic texts",
+                "D": "Lack of vocabulary recognition"
+              },
+              "answer": "B",
+              "kp": "kp-sla-reading",
+              "dimension": "discourse",
+              "points": 3,
+              "explanation": "The passage notes strong receptive skills alongside persistent morphosyntactic errors in output."
+            },
+            {
+              "id": "2.2",
+              "stem": "According to Swain's Output Hypothesis, why is production valuable?",
+              "options": {
+                "A": "It replaces the need for reading",
+                "B": "It forces learners to notice syntactic gaps and test hypotheses",
+                "C": "It eliminates all grammatical errors immediately",
+                "D": "It relies solely on rote memorization"
+              },
+              "answer": "B",
+              "kp": "kp-sla-reading",
+              "dimension": "discourse",
+              "points": 3,
+              "explanation": "Output pushes learners from semantic processing to syntactic processing."
+            },
+            {
+              "id": "2.3",
+              "stem": "What does the phrase 'receptive-productive gap' refer to?",
+              "options": {
+                "A": "High comprehension paired with weaker active production",
+                "B": "A gap between teachers and researchers",
+                "C": "Forgetting vocabulary overnight",
+                "D": "Reading faster than listening"
+              },
+              "answer": "A",
+              "kp": "kp-sla-reading",
+              "dimension": "discourse",
+              "points": 3,
+              "explanation": "Receptive skills (reading/listening) outpaced productive skills (speaking/writing)."
+            }
+          ]
+        }
+      ]
+    },
+    "part3": {
+      "passage": "Designing an effective language assessment requires balancing receptive and productive tasks. [1] Without such lexical foundations, learners struggle to decode connected prose. [2] Next, discourse-level tasks evaluate whether learners can track logical flow across paragraphs. [3] Only then should an exam introduce error-correction items that activate the learner's internal monitor. [4] Finally, a controlled output task compels learners to synthesize syntax under explicit constraints. [5]",
+      "options": [
+        {
+          "id": "A",
+          "text": "First, concept-matching items verify rapid form-meaning retrieval."
+        },
+        {
+          "id": "B",
+          "text": "Reading comprehension then tests whether learners can infer meaning from comprehensible input."
+        },
+        {
+          "id": "C",
+          "text": "Cloze and grammar fill-ins bridge comprehension with precise morphosyntactic selection."
+        },
+        {
+          "id": "D",
+          "text": "Such localized editing reveals whether accuracy holds under scrutiny."
+        },
+        {
+          "id": "E",
+          "text": "Together, these seven stages yield a diagnostic profile rather than a single opaque score."
+        },
+        {
+          "id": "F",
+          "text": "Therefore, exams should remove all grammar sections completely."
+        },
+        {
+          "id": "G",
+          "text": "Historically, paper dictionaries were printed in black ink."
+        }
+      ],
+      "items": [
+        {
+          "id": "3.1",
+          "answer": "A",
+          "kp": "kp-cohesion",
+          "dimension": "discourse",
+          "points": 3,
+          "explanation": "'such lexical foundations' refers back to concept-matching items in A."
+        },
+        {
+          "id": "3.2",
+          "answer": "B",
+          "kp": "kp-cohesion",
+          "dimension": "discourse",
+          "points": 3,
+          "explanation": "B introduces reading comprehension before 'Next, discourse-level tasks'."
+        },
+        {
+          "id": "3.3",
+          "answer": "C",
+          "kp": "kp-cohesion",
+          "dimension": "discourse",
+          "points": 3,
+          "explanation": "C links discourse tasks to the subsequent error-correction stage."
+        },
+        {
+          "id": "3.4",
+          "answer": "D",
+          "kp": "kp-cohesion",
+          "dimension": "discourse",
+          "points": 3,
+          "explanation": "'Such localized editing' directly echoes error-correction items."
+        },
+        {
+          "id": "3.5",
+          "answer": "E",
+          "kp": "kp-cohesion",
+          "dimension": "discourse",
+          "points": 3,
+          "explanation": "E concludes the seven-stage progression with a summary statement."
+        }
+      ],
+      "distractorExplanations": {
+        "F": "Contradicts the passage's argument for balancing receptive and productive morphosyntax.",
+        "G": "Off-topic detail with no lexical or logical link to assessment design."
+      }
+    },
+    "part4": {
+      "passage": "Although many learners [1] extensive reading as sufficient for fluency, classroom evidence suggests a more nuanced picture. When reading, students can often [2] meaning from context without analyzing verb morphology. [3], when asked to write a formal summary, they must choose exact tense, agreement, and connectors. This shift [4] attention toward form, allowing learners to [5] their own drafts more reliably. [6], combining input with structured output accelerates accuracy.",
+      "items": [
+        {
+          "id": "4.1",
+          "options": {
+            "A": "regard",
+            "B": "insist",
+            "C": "complain",
+            "D": "prevent"
+          },
+          "answer": "A",
+          "kp": "kp-markers",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "Collocation: 'regard X as Y'."
+        },
+        {
+          "id": "4.2",
+          "options": {
+            "A": "invent",
+            "B": "infer",
+            "C": "abolish",
+            "D": "postpone"
+          },
+          "answer": "B",
+          "kp": "kp-sla-reading",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "Readers infer meaning from surrounding context."
+        },
+        {
+          "id": "4.3",
+          "options": {
+            "A": "Similarly",
+            "B": "Besides",
+            "C": "However",
+            "D": "Namely"
+          },
+          "answer": "C",
+          "kp": "kp-markers",
+          "dimension": "discourse",
+          "points": 2,
+          "explanation": "Contrasts reading comprehension with writing demands."
+        },
+        {
+          "id": "4.4",
+          "options": {
+            "A": "directs",
+            "B": "hides",
+            "C": "cancels",
+            "D": "divides"
+          },
+          "answer": "A",
+          "kp": "kp-cohesion",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "Collocation: 'directs attention toward form'."
+        },
+        {
+          "id": "4.5",
+          "options": {
+            "A": "ignore",
+            "B": "monitor",
+            "C": "abandon",
+            "D": "borrow"
+          },
+          "answer": "B",
+          "kp": "kp-monitor",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "Krashen's Monitor Hypothesis centers on self-monitoring drafts."
+        },
+        {
+          "id": "4.6",
+          "options": {
+            "A": "Otherwise",
+            "B": "Consequently",
+            "C": "Whereas",
+            "D": "Instead"
+          },
+          "answer": "B",
+          "kp": "kp-markers",
+          "dimension": "discourse",
+          "points": 2,
+          "explanation": "Introduces the concluding consequence."
+        }
+      ]
+    },
+    "part5": {
+      "passage": "Fill in each blank with the grammatically accurate form:\n1. Having [1] (analyze) the immersion data, Swain proposed the Output Hypothesis.\n2. Neither the passage nor the exercises [2] (require) subjective grading.\n3. Learners notice grammatical gaps [3] they attempt to express complex ideas.\n4. The diagnostic report highlights [4] (accurate) across four linguistic dimensions.",
+      "items": [
+        {
+          "id": "5.1",
+          "prompt": "analyze",
+          "accepted": [
+            "analyzed",
+            "analysed"
+          ],
+          "kp": "kp-morph",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "Perfect participle 'Having analyzed' requires the past participle."
+        },
+        {
+          "id": "5.2",
+          "prompt": "require",
+          "accepted": [
+            "require"
+          ],
+          "kp": "kp-morph",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "With 'Neither A nor B', the verb agrees with the nearer plural subject 'exercises'."
+        },
+        {
+          "id": "5.3",
+          "prompt": "conjunction",
+          "accepted": [
+            "when",
+            "whenever",
+            "as",
+            "while"
+          ],
+          "kp": "kp-morph",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "A temporal conjunction links noticing gaps to attempting production."
+        },
+        {
+          "id": "5.4",
+          "prompt": "accurate",
+          "accepted": [
+            "accuracy"
+          ],
+          "kp": "kp-morph",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "Nominalization: the object of 'highlights' requires the noun 'accuracy'."
+        }
+      ]
+    },
+    "part6": {
+      "lines": [
+        {
+          "line": 1,
+          "text": "Although comprehensible input are essential for acquisition,"
+        },
+        {
+          "line": 2,
+          "text": "learners also need structured output to improve accurate."
+        },
+        {
+          "line": 3,
+          "text": "In addition, they must carefully to monitor their drafts."
+        },
+        {
+          "line": 4,
+          "text": "Because this balance, their writing becomes more coherent."
+        }
+      ],
+      "items": [
+        {
+          "id": "6.1",
+          "line": 1,
+          "op": "replace",
+          "target": "are",
+          "fix": "is",
+          "kp": "kp-monitor",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "'comprehensible input' is an uncountable singular subject requiring 'is'."
+        },
+        {
+          "id": "6.2",
+          "line": 2,
+          "op": "replace",
+          "target": "accurate",
+          "fix": "accuracy",
+          "kp": "kp-morph",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "The verb 'improve' takes the noun 'accuracy', not the adjective 'accurate'."
+        },
+        {
+          "id": "6.3",
+          "line": 3,
+          "op": "delete",
+          "target": "to",
+          "fix": "",
+          "acceptedFixes": [
+            "",
+            "to"
+          ],
+          "kp": "kp-monitor",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "Modal 'must' takes the bare infinitive 'monitor' without 'to'."
+        },
+        {
+          "id": "6.4",
+          "line": 4,
+          "op": "add",
+          "target": "Because",
+          "fix": "of",
+          "acceptedFixes": [
+            "of",
+            "Because of"
+          ],
+          "kp": "kp-cohesion",
+          "dimension": "morphosyntax",
+          "points": 2,
+          "explanation": "Before a noun phrase ('this balance'), use the compound preposition 'Because of'."
+        }
+      ]
+    },
+    "part7": {
+      "id": "7.1",
+      "mode": "nl-rules",
+      "prompt": "Write a concise academic synthesis (18 to 45 words) explaining why language learners need both input and output. Your response MUST:\n1. Use a formal concessive marker (although or whereas)\n2. Mention both 'input' and 'output'\n3. Mention 'accuracy' or 'monitor'\n4. Include a causal connector (because, therefore, or consequently)\n5. Avoid informal contractions (don't, can't, won't, isn't).",
+      "starterCode": "",
+      "minWords": 18,
+      "maxWords": 45,
+      "requiredAnchors": [
+        {
+          "label": "Concessive marker (although/whereas)",
+          "pattern": "\\b(although|whereas)\\b"
+        },
+        {
+          "label": "Lexical anchor: input",
+          "pattern": "\\binput\\b"
+        },
+        {
+          "label": "Lexical anchor: output",
+          "pattern": "\\boutput\\b"
+        },
+        {
+          "label": "Lexical anchor: accuracy or monitor",
+          "pattern": "\\b(accuracy|monitor|monitoring)\\b"
+        },
+        {
+          "label": "Causal connector (because/therefore/consequently)",
+          "pattern": "\\b(because|therefore|consequently)\\b"
+        }
+      ],
+      "forbiddenPatterns": [
+        {
+          "label": "Informal contractions",
+          "pattern": "\\b(don't|can't|won't|isn't|aren't)\\b"
+        }
+      ],
+      "referenceSolution": "Although comprehensible input builds strong receptive skills, learners also require structured output because active production compels them to notice syntactic gaps and monitor grammatical accuracy.",
+      "negativeSolution": "Input is good, isn't it?",
+      "kp": "kp-synthesis",
+      "dimension": "output",
+      "points": 20,
+      "explanation": "A strong academic synthesis pairs a concessive clause with a causal explanation while maintaining formal register."
+    }
+  }
+}

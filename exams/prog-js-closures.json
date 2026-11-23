@@ -1,0 +1,514 @@
+{
+  "meta": {
+    "id": "prog-js-closures",
+    "title": "Gaokao-Style Assessment: JavaScript Closures & Lexical Scope",
+    "domain": "programming",
+    "durationMinutes": 35,
+    "scale": "compact"
+  },
+  "knowledgePoints": [
+    {
+      "id": "kp-lexical",
+      "name": "Lexical Scope & Closure Capture",
+      "dimension": "lexicon",
+      "remediation": "Trace which outer bindings a function closes over at definition time, not call time."
+    },
+    {
+      "id": "kp-var-let",
+      "name": "Block Scope (let/const) vs Function Scope (var)",
+      "dimension": "morphosyntax",
+      "remediation": "Compare loop-variable binding per iteration with let versus shared binding with var."
+    },
+    {
+      "id": "kp-state",
+      "name": "Encapsulated Mutable State",
+      "dimension": "discourse",
+      "remediation": "Verify how multiple factory calls allocate independent closure environments."
+    },
+    {
+      "id": "kp-hof",
+      "name": "Higher-Order Function Control Flow",
+      "dimension": "discourse",
+      "remediation": "Follow return values of wrapper functions and guard conditions."
+    },
+    {
+      "id": "kp-impl",
+      "name": "Stateful Closure Implementation",
+      "dimension": "output",
+      "remediation": "Write small factory functions and test isolation across multiple instances."
+    }
+  ],
+  "parts": {
+    "part1": {
+      "pairs": [
+        {
+          "id": "1.1",
+          "left": "Closure",
+          "rightId": "A",
+          "right": "A function bundled with references to its lexical environment",
+          "kp": "kp-lexical",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "Closures retain access to outer variables after the outer call returns."
+        },
+        {
+          "id": "1.2",
+          "left": "let in for-loop",
+          "rightId": "B",
+          "right": "Creates a fresh binding for each loop iteration",
+          "kp": "kp-var-let",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "Block-scoped let creates a new lexical environment per iteration."
+        },
+        {
+          "id": "1.3",
+          "left": "var in for-loop",
+          "rightId": "C",
+          "right": "Shares a single function-scoped binding across all iterations",
+          "kp": "kp-var-let",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "All callbacks created in a var loop observe the final value."
+        },
+        {
+          "id": "1.4",
+          "left": "Factory function",
+          "rightId": "D",
+          "right": "Returns an object whose methods share private closure state",
+          "kp": "kp-state",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "Each call to a factory allocates fresh private variables."
+        },
+        {
+          "id": "1.5",
+          "left": "Temporal Dead Zone",
+          "rightId": "E",
+          "right": "Period before let/const declaration where access throws ReferenceError",
+          "kp": "kp-var-let",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "Accessing let/const before initialization throws ReferenceError."
+        }
+      ]
+    },
+    "part2": {
+      "passages": [
+        {
+          "id": "P2-A",
+          "title": "Passage A: Memoized Once-Wrapper",
+          "body": "function makeOnce(fn) {\n  let called = false;\n  let cached;\n  return function (...args) {\n    if (!called) {\n      called = true;\n      cached = fn.apply(this, args);\n    }\n    return cached;\n  };\n}",
+          "items": [
+            {
+              "id": "2.1",
+              "stem": "If fn() returns undefined on the first call, what happens on the second call?",
+              "options": {
+                "A": "fn runs again because cached is undefined",
+                "B": "fn does not run again because called is already true",
+                "C": "It throws a TypeError",
+                "D": "It returns null"
+              },
+              "answer": "B",
+              "kp": "kp-hof",
+              "dimension": "discourse",
+              "points": 3,
+              "explanation": "The separate boolean flag called prevents re-execution even when cached is undefined."
+            },
+            {
+              "id": "2.2",
+              "stem": "What happens if makeOnce(fn) is called twice to create f1 and f2?",
+              "options": {
+                "A": "f1 and f2 share the same called flag",
+                "B": "f2 overwrites f1's cached value",
+                "C": "f1 and f2 each have independent called and cached bindings",
+                "D": "The second call throws"
+              },
+              "answer": "C",
+              "kp": "kp-state",
+              "dimension": "discourse",
+              "points": 3,
+              "explanation": "Each invocation of makeOnce creates a fresh lexical environment."
+            },
+            {
+              "id": "2.3",
+              "stem": "Why does the wrapper use fn.apply(this, args)?",
+              "options": {
+                "A": "To preserve both the caller's this context and all arguments",
+                "B": "To convert args into a string",
+                "C": "To delay execution asynchronously",
+                "D": "To clone fn's closure"
+              },
+              "answer": "A",
+              "kp": "kp-hof",
+              "dimension": "morphosyntax",
+              "points": 3,
+              "explanation": "apply forwards both dynamic this and the rest-parameter array args."
+            }
+          ]
+        }
+      ]
+    },
+    "part3": {
+      "passage": "function createRateLimiter(limit) {\n  [1]\n  return function tryAcquire() {\n    [2]\n    [3]\n    [4]\n  };\n}\n[5]",
+      "options": [
+        {
+          "id": "A",
+          "text": "let used = 0;"
+        },
+        {
+          "id": "B",
+          "text": "if (used >= limit) { return false; }"
+        },
+        {
+          "id": "C",
+          "text": "used += 1;"
+        },
+        {
+          "id": "D",
+          "text": "return true;"
+        },
+        {
+          "id": "E",
+          "text": "const gate = createRateLimiter(2);"
+        },
+        {
+          "id": "F",
+          "text": "var used = limit + 1;"
+        },
+        {
+          "id": "G",
+          "text": "return limit;"
+        }
+      ],
+      "items": [
+        {
+          "id": "3.1",
+          "answer": "A",
+          "kp": "kp-state",
+          "dimension": "discourse",
+          "points": 3,
+          "explanation": "Initialize private counter used in the outer closure."
+        },
+        {
+          "id": "3.2",
+          "answer": "B",
+          "kp": "kp-hof",
+          "dimension": "discourse",
+          "points": 3,
+          "explanation": "Guard against exceeding limit before incrementing."
+        },
+        {
+          "id": "3.3",
+          "answer": "C",
+          "kp": "kp-state",
+          "dimension": "discourse",
+          "points": 3,
+          "explanation": "Increment used only when acquisition succeeds."
+        },
+        {
+          "id": "3.4",
+          "answer": "D",
+          "kp": "kp-hof",
+          "dimension": "discourse",
+          "points": 3,
+          "explanation": "Return true to signal that the slot was acquired."
+        },
+        {
+          "id": "3.5",
+          "answer": "E",
+          "kp": "kp-state",
+          "dimension": "discourse",
+          "points": 3,
+          "explanation": "Instantiate the limiter after defining the factory."
+        }
+      ],
+      "distractorExplanations": {
+        "F": "Initializing used above limit would make every call fail immediately.",
+        "G": "Returning limit instead of a boolean breaks the tryAcquire contract."
+      }
+    },
+    "part4": {
+      "passage": "function makeAdder(base) {\n  const offset = [1];\n  return [2] (n) {\n    return offset [3] n;\n  };\n}\nconst add5 = makeAdder(5);\nconst add10 = makeAdder(10);\nadd5(3) === [4];\nadd10(3) === [5];\n// Because each call allocates a [6] closure, add5 and add10 do not interfere.",
+      "items": [
+        {
+          "id": "4.1",
+          "options": {
+            "A": "base",
+            "B": "n",
+            "C": "this",
+            "D": "null"
+          },
+          "answer": "A",
+          "kp": "kp-lexical",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "offset captures the outer parameter base."
+        },
+        {
+          "id": "4.2",
+          "options": {
+            "A": "class",
+            "B": "function",
+            "C": "for",
+            "D": "let"
+          },
+          "answer": "B",
+          "kp": "kp-hof",
+          "dimension": "morphosyntax",
+          "points": 2,
+          "explanation": "makeAdder returns an inner function."
+        },
+        {
+          "id": "4.3",
+          "options": {
+            "A": "-",
+            "B": "*",
+            "C": "+",
+            "D": "/"
+          },
+          "answer": "C",
+          "kp": "kp-hof",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "An adder sums offset and n."
+        },
+        {
+          "id": "4.4",
+          "options": {
+            "A": "5",
+            "B": "8",
+            "C": "13",
+            "D": "15"
+          },
+          "answer": "B",
+          "kp": "kp-lexical",
+          "dimension": "discourse",
+          "points": 2,
+          "explanation": "5 + 3 = 8."
+        },
+        {
+          "id": "4.5",
+          "options": {
+            "A": "8",
+            "B": "10",
+            "C": "13",
+            "D": "30"
+          },
+          "answer": "C",
+          "kp": "kp-state",
+          "dimension": "discourse",
+          "points": 2,
+          "explanation": "10 + 3 = 13."
+        },
+        {
+          "id": "4.6",
+          "options": {
+            "A": "global",
+            "B": "shared",
+            "C": "separate",
+            "D": "static"
+          },
+          "answer": "C",
+          "kp": "kp-state",
+          "dimension": "lexicon",
+          "points": 2,
+          "explanation": "Each factory invocation creates a separate closure environment."
+        }
+      ]
+    },
+    "part5": {
+      "passage": "Fill in the exact JavaScript syntax:\n1. To avoid loop callbacks sharing one index variable, declare the loop counter with [1] instead of var.\n2. Inside a factory, a variable declared with [2] cannot be reassigned.\n3. Calling fn.[3](ctx, argsArray) invokes fn with explicit this and an array of arguments.\n4. An arrow function inherits [4] lexically from its enclosing scope.",
+      "items": [
+        {
+          "id": "5.1",
+          "prompt": "keyword",
+          "accepted": [
+            "let"
+          ],
+          "caseSensitive": true,
+          "kp": "kp-var-let",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "let creates a block-scoped binding per iteration."
+        },
+        {
+          "id": "5.2",
+          "prompt": "keyword",
+          "accepted": [
+            "const"
+          ],
+          "caseSensitive": true,
+          "kp": "kp-var-let",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "const prevents reassignment of the binding."
+        },
+        {
+          "id": "5.3",
+          "prompt": "method name",
+          "accepted": [
+            "apply"
+          ],
+          "caseSensitive": true,
+          "kp": "kp-hof",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "Function.prototype.apply takes (thisArg, argsArray)."
+        },
+        {
+          "id": "5.4",
+          "prompt": "keyword",
+          "accepted": [
+            "this"
+          ],
+          "caseSensitive": true,
+          "kp": "kp-lexical",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "Arrow functions capture this lexically."
+        }
+      ]
+    },
+    "part6": {
+      "lines": [
+        {
+          "line": 1,
+          "text": "function buildFuncs(n) {"
+        },
+        {
+          "line": 2,
+          "text": "  const out = {};"
+        },
+        {
+          "line": 3,
+          "text": "  for (var i = 0; i <= n; i += 1) {"
+        },
+        {
+          "line": 4,
+          "text": "    out.push(() => i);"
+        },
+        {
+          "line": 5,
+          "text": "  }"
+        },
+        {
+          "line": 6,
+          "text": "  out;"
+        },
+        {
+          "line": 7,
+          "text": "}"
+        }
+      ],
+      "items": [
+        {
+          "id": "6.1",
+          "line": 2,
+          "op": "replace",
+          "target": "{}",
+          "fix": "[]",
+          "caseSensitive": true,
+          "kp": "kp-state",
+          "dimension": "morphosyntax",
+          "points": 2,
+          "explanation": "out must be an Array ([]) so out.push works."
+        },
+        {
+          "id": "6.2",
+          "line": 3,
+          "op": "replace",
+          "target": "var",
+          "fix": "let",
+          "caseSensitive": true,
+          "kp": "kp-var-let",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "Using let gives each pushed arrow function its own i binding."
+        },
+        {
+          "id": "6.3",
+          "line": 3,
+          "op": "replace",
+          "target": "<=",
+          "fix": "<",
+          "acceptedFixes": [
+            "<",
+            "i < n"
+          ],
+          "caseSensitive": true,
+          "kp": "kp-var-let",
+          "dimension": "morphosyntax",
+          "points": 2,
+          "explanation": "For n items indexed 0..n-1, the loop bound must be i < n."
+        },
+        {
+          "id": "6.4",
+          "line": 6,
+          "op": "add",
+          "target": "out;",
+          "fix": "return",
+          "acceptedFixes": [
+            "return",
+            "return out;"
+          ],
+          "caseSensitive": true,
+          "kp": "kp-hof",
+          "dimension": "morphosyntax",
+          "points": 3,
+          "explanation": "Without return, buildFuncs(n) returns undefined."
+        }
+      ]
+    },
+    "part7": {
+      "id": "7.1",
+      "mode": "js-unit",
+      "functionName": "createCounter",
+      "prompt": "Implement createCounter(start = 0, step = 1) using a closure. It must return an object with three methods:\n- peek(): returns the current value without mutating it\n- next(): advances the value by step and returns the NEW value\n- reset(): resets the value back to start and returns start\nTwo counters created by createCounter must have completely independent state.",
+      "starterCode": "function createCounter(start = 0, step = 1) {\n  return {\n    peek() { return 0; },\n    next() { return 0; },\n    reset() { return 0; }\n  };\n}\n",
+      "referenceSolution": "function createCounter(start = 0, step = 1) {\n  let current = start;\n  return {\n    peek() {\n      return current;\n    },\n    next() {\n      current += step;\n      return current;\n    },\n    reset() {\n      current = start;\n      return current;\n    }\n  };\n}\n",
+      "negativeSolution": "function createCounter(start = 0, step = 1) {\n  return {\n    peek() { return start; },\n    next() { return start; },\n    reset() { return start; }\n  };\n}\n",
+      "cases": [
+        {
+          "name": "default start and step",
+          "expression": "(() => { const c = createCounter(); return [c.peek(), c.next(), c.next()]; })()",
+          "expected": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "custom start and step",
+          "expression": "(() => { const c = createCounter(10, 5); return [c.peek(), c.next(), c.next()]; })()",
+          "expected": [
+            10,
+            15,
+            20
+          ]
+        },
+        {
+          "name": "reset restores initial start",
+          "expression": "(() => { const c = createCounter(4, 2); c.next(); c.next(); return [c.reset(), c.peek(), c.next()]; })()",
+          "expected": [
+            4,
+            4,
+            6
+          ]
+        },
+        {
+          "name": "independent closure instances",
+          "expression": "(() => { const a = createCounter(1, 1); const b = createCounter(100, 10); a.next(); b.next(); return [a.peek(), b.peek()]; })()",
+          "expected": [
+            2,
+            110
+          ]
+        }
+      ],
+      "kp": "kp-impl",
+      "dimension": "output",
+      "points": 20,
+      "explanation": "Keep current in the closure scope of createCounter so each returned object maintains isolated private state."
+    }
+  }
+}
