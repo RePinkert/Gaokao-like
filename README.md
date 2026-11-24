@@ -1,4 +1,4 @@
-# gaokao-exam
+# Gaokao-like
 
 将任意学习材料（自然语言、编程语言、数学/形式系统）按高考英语七大题型（听力替换为概念匹配/连线）构建为独立可运行的交互式网页试卷，配备零 LLM 的确定性自动判分（JS 单元测试、带防 `sorry`/签名校验的 Lean 4 验证器、自然语言规则引擎）与四维语言学诊断报告。
 
@@ -7,7 +7,7 @@
 构建全部示例试卷到 `artifacts/*.html`（浏览器直接打开即可答题与判分）：
 
 ```powershell
-cd gaokao-exam
+cd Gaokao-like
 python scripts/build_exam.py
 ```
 
@@ -27,7 +27,7 @@ python scripts/grade_part7.py exams/math-logic-lean4.json Part7.lean --static-on
 ## 测一遍
 
 ```powershell
-cd gaokao-exam
+cd Gaokao-like
 python scripts/check.py
 python -m pytest -q tests
 ```
@@ -37,7 +37,7 @@ python -m pytest -q tests
 ## 目录
 
 ```
-gaokao-exam/
+Gaokao-like/
   README.md       项目说明、运行与测试入口
   AGENTS.md       本项目特有约定
   exams/          数据驱动题库 JSON（数学/Lean 4、编程/JS、自然语言）
